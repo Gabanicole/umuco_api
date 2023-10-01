@@ -1,0 +1,45 @@
+ sites
+   "name":"site1",
+    "picture":"picture1",
+    "description":"content1",
+    "location":"location1"
+  blogs
+    "title": "blog1",
+    "image": "image1",
+    "content":"content 1",
+    "comment":"comment1"
+
+    const User = require('./userModel');
+const Role = require('./roleModel');
+
+// create a new role
+const adminRole = new Role({
+  name: 'Admin',
+  permissions: ['create', 'read', 'update', 'delete']
+});
+
+// save the role
+adminRole.save((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('Role saved');
+  }
+});
+
+// create a new user with admin role
+const newUser = new User({
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+  password: 'password123',
+  role: adminRole._id // Assigning the role id to the user role field
+});
+
+// save the user
+newUser.save((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('User saved');
+  }
+});
